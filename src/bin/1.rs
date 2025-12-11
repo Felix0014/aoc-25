@@ -11,14 +11,14 @@ fn main() -> io::Result<()> {
     for line in reader.lines() {
         let line = line?;
         let direction = line[0..1].parse::<char>().unwrap();
-        let mut val = match line[1..].parse::<i32>() {
+        let val = match line[1..].parse::<i32>() {
             Ok(v) => v,
             Err(_) => continue,
         };
         current_code += if direction == 'R' { val } else { -val };
         current_code += if current_code < 0 { 100 } else { 0 };
         current_code %= 100;
-        if (current_code == 0) {
+        if current_code == 0 {
             code += 1;
         }
     }
